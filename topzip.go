@@ -5,10 +5,13 @@ import "sort"
 
 func ZipTop(numbers []int, zip int, ntop int) {
 	var result [][]int
+
 	for i := 0; i < len(numbers)-zip+1; i++ {
 		window := numbers[i : i+zip]
-		sort.Sort(sort.Reverse(sort.IntSlice(window)))
-		result = append(result, window)
+		heap := make([]int, zip)
+		copy(heap, window)
+		sort.Sort(sort.Reverse(sort.IntSlice(heap)))
+		result = append(result, heap[0:ntop])
 	}
 	fmt.Printf("%v\n", result)
 }
